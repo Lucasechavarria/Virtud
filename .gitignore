@@ -1,0 +1,63 @@
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Node
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Firebase
+.firebase/
+.firebaserc
+firebase-debug.log
+firestore.indexes.json
+firestore.rules
+storage.rules
+
+# Builder.io
+builder.json
+components.json
+
+# Output build cache
+.vite/
+.next/
+out/
+
+# Environment variables
+.env
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor config
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Lock files
+*.lock
+
+# EXCLUDE specific known wrong files
+ConversorDeMonedas/
+historial.txt
+biblioteca/
+*.iml
