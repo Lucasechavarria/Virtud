@@ -12,11 +12,17 @@ Una aplicación frontend moderna creada con:
 
 📦 Virtud
 ┣ 📂 public ← recursos estáticos (íconos, logo, etc.)
+
 ┣ 📂 src ← código fuente (componentes, lógica, estilos)
+
 ┣ 📜 index.html ← punto de entrada HTML
+
 ┣ 📜 package.json
+
 ┣ 📜 vite.config.ts
+
 ┣ 📜 tailwind.config.ts
+
 ┗ 📜 tsconfig.json
 
 
