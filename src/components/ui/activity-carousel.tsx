@@ -17,6 +17,7 @@ interface ActivityCarouselProps {
   subtitle: string;
   activities: Activity[];
   accentColor?: string;
+  buttonText: string; // Add buttonText prop
 }
 
 export const ActivityCarousel = ({
@@ -24,6 +25,7 @@ export const ActivityCarousel = ({
   subtitle,
   activities,
   accentColor = "virtud-orange-500",
+  buttonText, // Destructure buttonText prop
 }: ActivityCarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleCards, setVisibleCards] = useState(3);
@@ -155,8 +157,8 @@ export const ActivityCarousel = ({
                         size="lg"
                         className={`w-full bg-${accentColor} hover:bg-virtud-orange-600 text-white font-semibold shadow-xl`}
                       >
-                        <Calendar className="mr-2 h-5 w-5" />
-                        Reservar Clase
+                        <Calendar className="mr-2 h-5 w-5" /> {/* Use buttonText here */}
+                        {buttonText}
                       </Button>
                     </div>
                   </div>

@@ -43,34 +43,35 @@ import { ContactForm } from "@/components/ui/contact-form";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
 import { NewsletterSignup } from "@/components/ui/newsletter-signup";
-
+import AuthModal from "@/components/auth/AuthModal";
 const Index = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   // Using real activity flyers from Virtud
   const heroImages = [
     {
-      url: "https://cdn.builder.io/api/v1/image/assets%2F2e33339d59b6461ba11b406cfcff6319%2F4c88d4649474428eab8b62af83c0293e?format=webp&width=800",
+      url: "public/images/Boxeo.webp",
       title: "Boxeo de Alto Rendimiento",
       description: "Lunes a Viernes 06:00 a 22:00 - Por día 6.90€, por mes 30€",
     },
     {
-      url: "https://cdn.builder.io/api/v1/image/assets%2F2e33339d59b6461ba11b406cfcff6319%2F7768ffd104f94624901792fd1d80b7e5?format=webp&width=800",
+      url: "public/images/Funcional.webp",
       title: "Entrenamiento Funcional",
       description: "Martes, Jueves y Viernes 19hs - Alta intensidad",
     },
     {
-      url: "https://cdn.builder.io/api/v1/image/assets%2F2e33339d59b6461ba11b406cfcff6319%2F85e22b6619204c9dafcac4a49c650a47?format=webp&width=800",
+      url: "public/images/Arqueria.webp",
       title: "Arquería Tradicional Coreana",
       description: "Sábados 10hs - Precisión y concentración",
     },
     {
-      url: "https://cdn.builder.io/api/v1/image/assets%2F2e33339d59b6461ba11b406cfcff6319%2F9d547f310ce540cfbe17a0863abf7478?format=webp&width=800",
+      url: "public/images/DefensaPersonal.webp",
       title: "Defensa Personal",
       description: "Martes y Jueves 19hs - Técnicas efectivas",
     },
     {
-      url: "https://cdn.builder.io/api/v1/image/assets%2F2e33339d59b6461ba11b406cfcff6319%2Faee913c4127b4be6a7e6e1fdf7238176?format=webp&width=800",
+      url: "public/images/KungFu.webp",
       title: "Kung Fu Shaolin",
       description:
         "Lunes 19hs, Miércoles 18hs, Sábados - Artes marciales tradicionales",
@@ -85,7 +86,7 @@ const Index = () => {
       description:
         "Ejercicios que mejoran tu rendimiento en actividades cotidianas y deportivas",
       imageUrl:
-        "https://cdn.builder.io/api/v1/image/assets%2F2e33339d59b6461ba11b406cfcff6319%2F33847b76e1344f04af80b472cc52e0cb?format=webp&width=800",
+        "public/images/Funcional.webp",
       schedule: "Mar, Jue, Vie 19hs",
     },
     {
@@ -94,7 +95,7 @@ const Index = () => {
       description:
         "Fitness divertido que combina baile latino con ejercicio cardiovascular",
       imageUrl:
-        "https://cdn.builder.io/api/v1/image/assets%2F2e33339d59b6461ba11b406cfcff6319%2Fb7b2bd1f1fd04daf86f823941324afb7?format=webp&width=800",
+        "public/images/Zumba.webp",
       schedule: "Lun 16hs, Vie 18hs",
     },
     {
@@ -103,7 +104,7 @@ const Index = () => {
       description:
         "Práctica milenaria que une cuerpo, mente y espíritu para el bienestar integral",
       imageUrl:
-        "https://cdn.builder.io/api/v1/image/assets%2F2e33339d59b6461ba11b406cfcff6319%2Fc533d64443524e619443c41114668abe?format=webp&width=800",
+        "public/images/Yoga.webp",
       schedule: "Mar y Jue 9hs",
     },
     {
@@ -112,8 +113,8 @@ const Index = () => {
       description:
         "Entrenamiento con pesas para desarrollar fuerza, masa muscular y definición",
       imageUrl:
-        "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop",
-      schedule: "Lun a Vie 6hs-22hs",
+        "public/images/Musculacion.webp",
+      schedule: "Lun a Vie 9hs-22hs",
     },
   ];
 
@@ -124,7 +125,7 @@ const Index = () => {
       description:
         "Arte marcial que combina técnicas de boxeo con patadas de artes marciales",
       imageUrl:
-        "https://cdn.builder.io/api/v1/image/assets%2F2e33339d59b6461ba11b406cfcff6319%2F2c443bb692b84dc895c19f7d14662b8c?format=webp&width=800",
+        "public/images/KickBoxing.webp",
       schedule: "Mar y Jue 18hs",
     },
     {
@@ -133,7 +134,7 @@ const Index = () => {
       description:
         "Arte marcial suave que mejora el equilibrio, flexibilidad y paz mental",
       imageUrl:
-        "https://cdn.builder.io/api/v1/image/assets%2F2e33339d59b6461ba11b406cfcff6319%2F3f15266095aa4688b3f3bc9bafc03582?format=webp&width=800",
+        "public/images/Taichi.webp",
       schedule: "Mar y Jue 17hs",
     },
     {
@@ -142,7 +143,7 @@ const Index = () => {
       description:
         "Arte marcial tradicional chino que desarrolla fuerza, agilidad y disciplina",
       imageUrl:
-        "https://cdn.builder.io/api/v1/image/assets%2F2e33339d59b6461ba11b406cfcff6319%2F086757d8c61d448ea83c18545c75e989?format=webp&width=800",
+        "public/images/KungFu.webp",
       schedule: "Lun 19hs, Mié 18hs, Sáb",
     },
     {
@@ -151,7 +152,7 @@ const Index = () => {
       description:
         "Técnicas prácticas y efectivas para protegerte en situaciones de riesgo",
       imageUrl:
-        "https://cdn.builder.io/api/v1/image/assets%2F2e33339d59b6461ba11b406cfcff6319%2F23bb1645bee64e5f8c8b29e3c7b17f0c?format=webp&width=800",
+        "public/images/DefensaPersonal.webp",
       schedule: "Mar y Jue 19hs",
     },
     {
@@ -160,8 +161,16 @@ const Index = () => {
       description:
         "Deporte de combate que desarrolla fuerza, resistencia y técnica de golpeo",
       imageUrl:
-        "https://cdn.builder.io/api/v1/image/assets%2F2e33339d59b6461ba11b406cfcff6319%2F21eace903f46480cb3bb4857d6e337b6?format=webp&width=800",
+        "public/images/Boxeo.webp",
       schedule: "Lun a Vie 6hs-22hs",
+    },
+    {
+      id: "arqueria",
+      title: "Arquería Tradicional Coreana",
+ description: "Precisión y concentración",
+      imageUrl:
+        "public/images/Arqueria.webp",
+        schedule: "Sabados 10hs",
     },
   ];
 
@@ -172,7 +181,7 @@ const Index = () => {
       description:
         "Técnica milenaria que equilibra la energía corporal y optimiza el rendimiento",
       imageUrl:
-        "https://cdn.builder.io/api/v1/image/assets%2F2e33339d59b6461ba11b406cfcff6319%2F12607f635be54ff8b04a8f1b2144d3db?format=webp&width=800",
+        "public/images/Acupuntura.webp",
     },
     {
       id: "ventosas",
@@ -180,7 +189,7 @@ const Index = () => {
       description:
         "Terapia de succión que mejora la circulación y libera tensiones musculares",
       imageUrl:
-        "https://cdn.builder.io/api/v1/image/assets%2F2e33339d59b6461ba11b406cfcff6319%2F5dc88ac51c25481e99e9ebcc95dea81b?format=webp&width=800",
+        "public/images/Ventosas.webp",
     },
     {
       id: "moxa",
@@ -188,7 +197,7 @@ const Index = () => {
       description:
         "Terapia de calor con artemisa que fortalece el sistema inmune y la vitalidad",
       imageUrl:
-        "https://cdn.builder.io/api/v1/image/assets%2F2e33339d59b6461ba11b406cfcff6319%2F7a222f8dbeae4c17a8ebd85017b3378e?format=webp&width=800",
+        "public/images/Moxibustion.webp",
     },
     {
       id: "masoterapia",
@@ -196,7 +205,7 @@ const Index = () => {
       description:
         "Masajes terapéuticos con técnicas tradicionales para el equilibrio energético",
       imageUrl:
-        "https://cdn.builder.io/api/v1/image/assets%2F2e33339d59b6461ba11b406cfcff6319%2F6c7abde8fddf4730b3c4296e21270bb1?format=webp&width=800",
+        "public/images/Tui-Na.webp",
     },
     {
       id: "auriculoterapia",
@@ -204,7 +213,7 @@ const Index = () => {
       description:
         "Estimulación de puntos específicos en la oreja para tratamiento de diversas afecciones",
       imageUrl:
-        "https://cdn.builder.io/api/v1/image/assets%2F2e33339d59b6461ba11b406cfcff6319%2F27c112fffa6c44569e814a3ee218d9e2?format=webp&width=800",
+        "public/images/Auriculoterapia.webp",
     },
     {
       id: "electroacupuntura",
@@ -212,7 +221,7 @@ const Index = () => {
       description:
         "Combinación de acupuntura tradicional con estimulación eléctrica suave para mayor efectividad",
       imageUrl:
-        "https://cdn.builder.io/api/v1/image/assets%2F2e33339d59b6461ba11b406cfcff6319%2F1553456676a0425fa84bace8aa8ec496?format=webp&width=800",
+        "public/images/Electroacupuntura.webp",
     },
   ];
 
@@ -261,26 +270,7 @@ const Index = () => {
     },
   ];
 
-  const testimonials = [
-    {
-      name: "María González",
-      text: "Virtud cambió mi vida. La combinación de entrenamiento de alto rendimiento y medicina china es única. Mi rendimiento deportivo mejoró increíblemente.",
-      rating: 5,
-      therapy: "Entrenamiento Funcional + Acupuntura",
-    },
-    {
-      name: "Carlos Martínez",
-      text: "Los profesionales son excepcionales. Me recuperé de mi lesión deportiva más rápido de lo esperado gracias a la rehabilitación integral.",
-      rating: 5,
-      therapy: "Rehabilitación Deportiva + Electro-Acupuntura",
-    },
-    {
-      name: "Ana Silva",
-      text: "El ambiente es increíble y las instalaciones de primera. Las clases de Kung Fu y Yoga son mi pasión. ¡Totalmente recomendado!",
-      rating: 5,
-      therapy: "Kung Fu + Yoga + Auriculoterapia",
-    },
-  ];
+  const testimonials: any[] = []; // Define testimonials as an empty array for now
 
   const weeklySchedule = [
     { time: "9 HS", tue: "YOGA", thu: "YOGA" },
@@ -310,10 +300,9 @@ const Index = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
+    }, testimonials.length > 0 ? 5000 : 0); // Only set interval if there are testimonials
     return () => clearInterval(interval);
   }, [testimonials.length]);
-
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
       {/* Navigation */}
@@ -322,14 +311,14 @@ const Index = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <img
-                src="https://cdn.builder.io/api/v1/image/assets%2F2e33339d59b6461ba11b406cfcff6319%2Fcc91e713a9554b0eaaf8920fb387b8f4?format=webp&width=800"
+                src="public/images/Banner.webp"
                 alt="Virtud Logo"
                 className="h-10 w-auto object-contain"
               />
             </div>
             <div className="hidden md:flex items-center gap-6">
               <a
-                href="#inicio"
+                href="#inicio" 
                 className="text-virtud-gray-600 dark:text-gray-300 hover:text-virtud-orange-500 dark:hover:text-virtud-orange-400 transition-colors text-base font-semibold"
               >
                 Inicio
@@ -359,7 +348,10 @@ const Index = () => {
                 Contacto
               </a>
               <ThemeToggle />
-              <Button className="bg-virtud-orange-500 hover:bg-virtud-orange-600 text-white text-sm font-bold px-6">
+              <Button
+                className="bg-virtud-orange-500 hover:bg-virtud-orange-600 text-white text-sm font-bold px-6"
+                onClick={() => setIsAuthModalOpen(true)}
+              >
                 Ingresar
               </Button>
             </div>
@@ -375,21 +367,19 @@ const Index = () => {
         {/* Background Logo - Light Mode */}
         <div className="absolute inset-0 flex items-center justify-center opacity-30 dark:opacity-0 transition-opacity duration-300">
           <img
-            src="https://cdn.builder.io/api/v1/image/assets%2F2e33339d59b6461ba11b406cfcff6319%2Fd247524e765e492092575ff600ab795c?format=webp&width=800"
+            src="public/images/LogoBlanco.webp"
             alt="Virtud Logo"
             className="w-2/3 max-w-2xl h-auto object-contain"
           />
         </div>
-
         {/* Background Logo - Dark Mode */}
         <div className="absolute inset-0 flex items-center justify-center opacity-0 dark:opacity-30 transition-opacity duration-300">
           <img
-            src="https://cdn.builder.io/api/v1/image/assets%2F2e33339d59b6461ba11b406cfcff6319%2F90a937ba2b384be4b8c0d01f0b133493?format=webp&width=800"
+            src="public/images/BlancoYNegro.webp"
             alt="Virtud Logo Dark"
             className="w-2/3 max-w-2xl h-auto object-contain"
           />
         </div>
-
         <div className="relative z-10 text-center px-4 max-w-4xl">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -432,7 +422,6 @@ const Index = () => {
             </Button>
           </motion.div>
         </div>
-
         {/* Scroll Indicator */}
         <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 animate-bounce">
           <div className="w-5 h-8 border-2 border-virtud-gray-400 dark:border-gray-500 rounded-full flex justify-center">
@@ -457,7 +446,6 @@ const Index = () => {
               tradicional china
             </p>
           </div>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((service, index) => (
               <motion.div
@@ -509,6 +497,7 @@ const Index = () => {
             subtitle="Actividades diseñadas para mejorar tu condición física y bienestar general"
             activities={fitnessActivities}
             accentColor="virtud-orange-500"
+ buttonText="Reserva tu clase"
           />
         </div>
       </section>
@@ -521,6 +510,7 @@ const Index = () => {
             subtitle="Disciplinas tradicionales que desarrollan fuerza, técnica y carácter"
             activities={martialArtsActivities}
             accentColor="virtud-orange-600"
+ buttonText="Reserva tu clase"
           />
         </div>
       </section>
@@ -536,7 +526,7 @@ const Index = () => {
             subtitle="Terapias milenarias para optimizar tu rendimiento y bienestar integral"
             activities={tcmActivities}
             accentColor="green-600"
-          />
+ buttonText="Reserva tu turno"/>
         </div>
       </section>
 
@@ -559,7 +549,6 @@ const Index = () => {
               actividades que más te interesen
             </p>
           </div>
-
           <div className="w-full mx-auto">
             <Card className="overflow-hidden shadow-lg bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
               <CardHeader className="bg-virtud-orange-500 dark:bg-virtud-orange-600 text-white py-4">
@@ -642,7 +631,6 @@ const Index = () => {
               </CardContent>
             </Card>
           </div>
-
           <div className="text-center mt-8">
             <Button
               size="lg"
@@ -655,7 +643,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* Testimonials Section - Comentado temporalmente */}
+      {/*
       <section className="py-16 bg-virtud-gray-900 dark:bg-gray-800 text-white transition-colors duration-300">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -663,57 +652,57 @@ const Index = () => {
               Testimonios de Nuestros Atletas
             </h2>
             <p className="text-lg text-gray-300 leading-relaxed">
-              Historias reales de transformación, recuperación y alto
-              rendimiento
+              Historias reales de transformación, recuperación y alto rendimiento
             </p>
           </div>
-
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              key={currentTestimonial}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.5 }}
-              className="text-center"
-            >
-              <div className="flex justify-center mb-4">
-                {[...Array(testimonials[currentTestimonial].rating)].map(
-                  (_, i) => (
-                    <Star
-                      key={i}
-                      className="w-6 h-6 text-virtud-orange-400 fill-current"
-                    />
-                  ),
-                )}
-              </div>
-              <blockquote className="text-xl md:text-2xl font-light mb-6 italic leading-relaxed">
-                "{testimonials[currentTestimonial].text}"
-              </blockquote>
-              <div className="font-bold text-lg">
-                {testimonials[currentTestimonial].name}
-              </div>
-              <div className="text-virtud-orange-400 mt-2 text-base">
-                {testimonials[currentTestimonial].therapy}
-              </div>
-            </motion.div>
-
-            <div className="flex justify-center mt-8 gap-2">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentTestimonial(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentTestimonial
-                      ? "bg-virtud-orange-500"
-                      : "bg-gray-600 hover:bg-gray-500"
-                  }`}
-                />
-              ))}
+          {testimonials.length > 0 && (
+            <div className="max-w-4xl mx-auto">
+              <motion.div
+                key={currentTestimonial}
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ duration: 0.5 }}
+                className="text-center"
+              >
+                <div className="flex justify-center mb-4">
+                  {[...Array(testimonials[currentTestimonial].rating)].map(
+                    (_, i) => (
+                      <Star
+                        key={i}
+                        className="w-6 h-6 text-virtud-orange-400 fill-current"
+                      />
+                    ),
+                  )}
+                </div>
+                <blockquote className="text-xl md:text-2xl font-light mb-6 italic leading-relaxed">
+                  "{testimonials[currentTestimonial].text}"
+                </blockquote>
+                <div className="font-bold text-lg">
+                  {testimonials[currentTestimonial].name}
+                </div>
+                <div className="text-virtud-orange-400 mt-2 text-base">
+                  {testimonials[currentTestimonial].therapy}
+                </div>
+              </motion.div>
             </div>
+          )}
+          <div className="flex justify-center mt-8 gap-2">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentTestimonial(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  index === currentTestimonial
+                    ? "bg-virtud-orange-500"
+                    : "bg-gray-600 hover:bg-gray-500"
+                }`}
+              />
+            ))}
           </div>
         </div>
       </section>
+      */}
 
       {/* Instagram Section */}
       <section
@@ -745,17 +734,16 @@ const Index = () => {
               Plataforma Digital Virtud
             </h2>
             <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Gestiona tu membresía, reserva turnos, realiza pagos y accede a
-              contenido exclusivo desde nuestra plataforma digital integral
+              Gestiona tu membresía, reserva turnos, realiza pagos y accede a contenido exclusivo desde nuestra plataforma digital integral
             </p>
           </div>
-
           <div className="max-w-2xl mx-auto">
             <Card className="bg-virtud-gray-800 dark:bg-gray-800/50 border-virtud-gray-700 dark:border-gray-600 text-white">
               <CardHeader className="text-center py-8">
                 <img
-                  src="https://cdn.builder.io/api/v1/image/assets%2F2e33339d59b6461ba11b406cfcff6319%2F02466d0b6120481495d60d5dca8a5ca9?format=webp&width=800"
+                  src="public/images/NegroYBlanco.webp"
                   alt="Virtud Logo"
+                  onClick={() => setIsAuthModalOpen(true)}
                   className="h-16 w-auto mx-auto mb-4"
                 />
                 <CardTitle className="text-2xl font-bold">
@@ -764,20 +752,20 @@ const Index = () => {
               </CardHeader>
               <CardContent className="space-y-6 text-center pb-8">
                 <p className="text-gray-300 text-base leading-relaxed">
-                  Inicia sesión en nuestra plataforma integral para gestionar tu
-                  experiencia en Virtud de manera completamente digital.
+                  Inicia sesión en nuestra plataforma integral para gestionar tu experiencia en Virtud de manera completamente digital.
                 </p>
                 <div className="space-y-4">
                   <Button
                     className="w-full bg-virtud-orange-500 hover:bg-virtud-orange-600 text-white text-lg font-bold py-3"
                     size="lg"
+                    onClick={() => setIsAuthModalOpen(true)}
                   >
                     <Shield className="mr-2 h-5 w-5" />
                     Iniciar Sesión
                   </Button>
                   <Button
                     variant="outline"
-                    className="w-full border-virtud-gray-600 text-white hover:bg-virtud-gray-700 text-lg font-bold py-3 border-2"
+                    className="w-full border-virtud-gray-600 text-virtud-gray-800 dark:text-white hover:bg-virtud-gray-100 dark:hover:bg-virtud-gray-700 text-lg font-bold py-3 border-2 transition-colors duration-300"
                     size="lg"
                   >
                     Registrarse
@@ -796,8 +784,7 @@ const Index = () => {
             ¿Listo para comenzar tu transformación?
           </h2>
           <p className="text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
-            Únete a la familia Virtud y descubre el equilibrio perfecto entre
-            fitness moderno y bienestar tradicional
+            Únete a la familia Virtud y descubre el equilibrio perfecto entre fitness moderno y bienestar tradicional
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
@@ -810,7 +797,7 @@ const Index = () => {
             <Button
               size="lg"
               variant="outline"
-              className="border-white text-white hover:bg-white hover:text-virtud-orange-500 text-lg font-bold px-8 py-3 border-2"
+              className="border-white text-virtud-gray-800 dark:text-white hover:bg-white hover:text-virtud-orange-500 text-lg font-bold px-8 py-3 border-2 transition-colors duration-300"
             >
               Agendar Visita
             </Button>
@@ -824,27 +811,23 @@ const Index = () => {
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <img
-                src="https://cdn.builder.io/api/v1/image/assets%2F2e33339d59b6461ba11b406cfcff6319%2F02466d0b6120481495d60d5dca8a5ca9?format=webp&width=800"
+                src="public/images/NegroYBlanco.webp"
                 alt="Virtud Logo"
                 className="h-16 w-auto mb-4"
               />
               <p className="text-gray-300 mb-6 text-base leading-relaxed">
-                Tu objetivo, es nuestro objetivo. Centro de entrenamiento
-                especializado en alto rendimiento y bienestar integral.
+                Tu objetivo, es nuestro objetivo. Centro de entrenamiento especializado en alto rendimiento y bienestar integral.
               </p>
               <div className="space-y-3 text-gray-300">
                 <div className="flex items-center gap-2">
                   <MapPin className="h-4 w-4" />
                   <div className="text-sm">
                     <p>Pellegrini 557, Burzaco</p>
-                    <p className="text-xs opacity-80">
-                      Club Independiente de Burzaco
-                    </p>
+                    <p className="text-xs opacity-80">Club Independiente de Burzaco</p>
                   </div>
                 </div>
               </div>
             </div>
-
             <div>
               <h3 className="font-bold mb-4 text-lg">Servicios</h3>
               <ul className="space-y-2 text-gray-300 text-sm">
@@ -854,33 +837,30 @@ const Index = () => {
                 <li>Rehabilitación Deportiva</li>
               </ul>
             </div>
-
             <div>
               <h3 className="font-bold mb-4 text-lg">Horarios</h3>
               <div className="space-y-2 text-gray-300">
                 <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4" />
-                  <span className="text-sm">Lun - Vie: 9:00 - 22:00</span>
+                  <span>Lun - Vie: 9:00 - 22:00</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4" />
-                  <span className="text-sm">Sáb: 9:00 - 20:00</span>
+                  <span>Sáb: 9:00 - 20:00</span>
                 </div>
               </div>
             </div>
-
             <div>
               <h3 className="font-bold mb-4 text-lg">Contacto</h3>
               <div className="space-y-3 text-gray-300">
                 <div className="flex items-center gap-2">
                   <Mail className="h-4 w-4" />
-                  <span className="text-sm">virtudgym@gmail.com</span>
+                  <span>virtudgym@gmail.com</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone className="h-4 w-4" />
-                  <span className="text-sm">+54 11 1365032</span>
+                  <span>+54 11 1365032</span>
                 </div>
-
                 {/* Redes Sociales Mejoradas */}
                 <div className="mt-6">
                   <h4 className="font-semibold mb-3 text-base">Síguenos</h4>
@@ -889,8 +869,9 @@ const Index = () => {
                       size="sm"
                       className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-medium text-sm justify-start h-10 rounded-lg transition-all duration-300 hover:scale-105"
                       onClick={() =>
-                        window.open("https://instagram.com/virtudgym", "_blank")
+                        window.open("https://www.instagram.com/virtud.gym?igsh=dnZpc2c4djdqeDRm", "_blank")
                       }
+
                     >
                       <Instagram className="mr-2 h-4 w-4" />
                       Instagram
@@ -898,10 +879,7 @@ const Index = () => {
                     <Button
                       size="sm"
                       className="bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm justify-start h-10 rounded-lg transition-all duration-300 hover:scale-105"
-                      onClick={() =>
-                        window.open("https://facebook.com/virtudgym", "_blank")
-                      }
-                    >
+                      onClick={() => window.open("https://www.facebook.com/virtudgym/", "_blank")}>
                       <Facebook className="mr-2 h-4 w-4" />
                       Facebook
                     </Button>
@@ -911,16 +889,13 @@ const Index = () => {
                       onClick={() =>
                         window.open(
                           "https://wa.me/5491151365032?text=¡Hola! Me interesa conocer más sobre el gimnasio Virtud.",
-                          "_blank",
+                          "_blank"
                         )
                       }
                     >
-                      {/* WhatsApp Official Icon SVG */}
                       <svg
                         viewBox="0 0 24 24"
-                        className="mr-2 h-4 w-4"
-                        fill="currentColor"
-                      >
+                        className="mr-2 h-4 w-4" fill="currentColor">
                         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.464 3.488" />
                       </svg>
                       WhatsApp
@@ -930,9 +905,8 @@ const Index = () => {
               </div>
             </div>
           </div>
-
           <div className="border-t border-virtud-gray-800 dark:border-gray-700 mt-8 pt-6 text-center text-gray-400 text-sm">
-            <p>&copy; 2024 Virtud Gym. Todos los derechos reservados.</p>
+            <p>&copy; 2025 Virtud Gym. Todos los derechos reservados.</p>
           </div>
         </div>
       </footer>
@@ -945,6 +919,9 @@ const Index = () => {
 
       {/* Scroll to Top Button */}
       <ScrollToTop />
+
+      {/* Authentication Modal */}
+      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
     </div>
   );
 };

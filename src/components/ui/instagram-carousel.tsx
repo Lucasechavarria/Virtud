@@ -261,7 +261,7 @@ export const InstagramCarousel = () => {
 
       <div className="mt-6 text-center">
         <a
-          href="https://instagram.com/virtudgym"
+          href="https://www.instagram.com/virtud.gym?igsh=dnZpc2c4djdqeDRm"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full hover:from-purple-600 hover:to-pink-600 transition-all duration-300 font-semibold"
