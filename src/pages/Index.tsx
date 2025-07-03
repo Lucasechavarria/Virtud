@@ -44,6 +44,11 @@ import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
 import { NewsletterSignup } from "@/components/ui/newsletter-signup";
 import AuthModal from "@/components/auth/AuthModal";
+import BookingPlatform from "@/components/BookingPlatform"; // Import BookingPlatform
+import ActivitiesList from "@/components/ActivitiesList";
+import { useAuth } from '@/context/AuthContext'; // Import useAuth
+import { useNavigate } from 'react-router-dom';
+
 const Index = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -51,27 +56,27 @@ const Index = () => {
   // Using real activity flyers from Virtud
   const heroImages = [
     {
-      url: "public/images/Boxeo.webp",
+      url: "/images/Boxeo.webp",
       title: "Boxeo de Alto Rendimiento",
       description: "Lunes a Viernes 06:00 a 22:00 - Por día 6.90€, por mes 30€",
     },
     {
-      url: "public/images/Funcional.webp",
+      url: "/images/Funcional.webp",
       title: "Entrenamiento Funcional",
       description: "Martes, Jueves y Viernes 19hs - Alta intensidad",
     },
     {
-      url: "public/images/Arqueria.webp",
+      url: "/images/Arqueria.webp",
       title: "Arquería Tradicional Coreana",
       description: "Sábados 10hs - Precisión y concentración",
     },
     {
-      url: "public/images/DefensaPersonal.webp",
+      url: "/images/DefensaPersonal.webp",
       title: "Defensa Personal",
       description: "Martes y Jueves 19hs - Técnicas efectivas",
     },
     {
-      url: "public/images/KungFu.webp",
+      url: "/images/KungFu.webp",
       title: "Kung Fu Shaolin",
       description:
         "Lunes 19hs, Miércoles 18hs, Sábados - Artes marciales tradicionales",
@@ -85,8 +90,7 @@ const Index = () => {
       title: "Funcional",
       description:
         "Ejercicios que mejoran tu rendimiento en actividades cotidianas y deportivas",
-      imageUrl:
-        "public/images/Funcional.webp",
+      imageUrl: "/images/Funcional.webp",
       schedule: "Mar, Jue, Vie 19hs",
     },
     {
@@ -94,8 +98,7 @@ const Index = () => {
       title: "Zumba",
       description:
         "Fitness divertido que combina baile latino con ejercicio cardiovascular",
-      imageUrl:
-        "public/images/Zumba.webp",
+      imageUrl: "/images/Zumba.webp",
       schedule: "Lun 16hs, Vie 18hs",
     },
     {
@@ -103,8 +106,7 @@ const Index = () => {
       title: "Yoga",
       description:
         "Práctica milenaria que une cuerpo, mente y espíritu para el bienestar integral",
-      imageUrl:
-        "public/images/Yoga.webp",
+      imageUrl: "/images/Yoga.webp",
       schedule: "Mar y Jue 9hs",
     },
     {
@@ -112,8 +114,7 @@ const Index = () => {
       title: "Musculación",
       description:
         "Entrenamiento con pesas para desarrollar fuerza, masa muscular y definición",
-      imageUrl:
-        "public/images/Musculacion.webp",
+      imageUrl: "/images/Musculacion.webp",
       schedule: "Lun a Vie 9hs-22hs",
     },
   ];
@@ -124,8 +125,7 @@ const Index = () => {
       title: "Kickboxing",
       description:
         "Arte marcial que combina técnicas de boxeo con patadas de artes marciales",
-      imageUrl:
-        "public/images/KickBoxing.webp",
+      imageUrl: "/images/KickBoxing.webp",
       schedule: "Mar y Jue 18hs",
     },
     {
@@ -133,8 +133,7 @@ const Index = () => {
       title: "Tai Chi",
       description:
         "Arte marcial suave que mejora el equilibrio, flexibilidad y paz mental",
-      imageUrl:
-        "public/images/Taichi.webp",
+      imageUrl: "/images/Taichi.webp",
       schedule: "Mar y Jue 17hs",
     },
     {
@@ -142,8 +141,7 @@ const Index = () => {
       title: "Kung Fu Shaolin",
       description:
         "Arte marcial tradicional chino que desarrolla fuerza, agilidad y disciplina",
-      imageUrl:
-        "public/images/KungFu.webp",
+      imageUrl: "/images/KungFu.webp",
       schedule: "Lun 19hs, Mié 18hs, Sáb",
     },
     {
@@ -151,8 +149,7 @@ const Index = () => {
       title: "Defensa Personal",
       description:
         "Técnicas prácticas y efectivas para protegerte en situaciones de riesgo",
-      imageUrl:
-        "public/images/DefensaPersonal.webp",
+      imageUrl: "/images/DefensaPersonal.webp",
       schedule: "Mar y Jue 19hs",
     },
     {
@@ -160,8 +157,7 @@ const Index = () => {
       title: "Boxeo",
       description:
         "Deporte de combate que desarrolla fuerza, resistencia y técnica de golpeo",
-      imageUrl:
-        "public/images/Boxeo.webp",
+      imageUrl: "/images/Boxeo.webp",
       schedule: "Lun a Vie 6hs-22hs",
     },
     {
@@ -169,7 +165,7 @@ const Index = () => {
       title: "Arquería Tradicional Coreana",
  description: "Precisión y concentración",
       imageUrl:
-        "public/images/Arqueria.webp",
+        "/images/Arqueria.webp",
         schedule: "Sabados 10hs",
     },
   ];
@@ -180,8 +176,7 @@ const Index = () => {
       title: "Acupuntura",
       description:
         "Técnica milenaria que equilibra la energía corporal y optimiza el rendimiento",
-      imageUrl:
-        "public/images/Acupuntura.webp",
+      imageUrl: "/images/Acupuntura.webp",
     },
     {
       id: "ventosas",
@@ -189,7 +184,7 @@ const Index = () => {
       description:
         "Terapia de succión que mejora la circulación y libera tensiones musculares",
       imageUrl:
-        "public/images/Ventosas.webp",
+        "/images/Ventosas.webp",
     },
     {
       id: "moxa",
@@ -197,7 +192,7 @@ const Index = () => {
       description:
         "Terapia de calor con artemisa que fortalece el sistema inmune y la vitalidad",
       imageUrl:
-        "public/images/Moxibustion.webp",
+        "/images/Moxibustion.webp",
     },
     {
       id: "masoterapia",
@@ -205,7 +200,7 @@ const Index = () => {
       description:
         "Masajes terapéuticos con técnicas tradicionales para el equilibrio energético",
       imageUrl:
-        "public/images/Tui-Na.webp",
+        "/images/Tui-Na.webp",
     },
     {
       id: "auriculoterapia",
@@ -213,7 +208,7 @@ const Index = () => {
       description:
         "Estimulación de puntos específicos en la oreja para tratamiento de diversas afecciones",
       imageUrl:
-        "public/images/Auriculoterapia.webp",
+        "/images/Auriculoterapia.webp",
     },
     {
       id: "electroacupuntura",
@@ -221,7 +216,7 @@ const Index = () => {
       description:
         "Combinación de acupuntura tradicional con estimulación eléctrica suave para mayor efectividad",
       imageUrl:
-        "public/images/Electroacupuntura.webp",
+        "/images/Electroacupuntura.webp",
     },
   ];
 
@@ -303,6 +298,14 @@ const Index = () => {
     }, testimonials.length > 0 ? 5000 : 0); // Only set interval if there are testimonials
     return () => clearInterval(interval);
   }, [testimonials.length]);
+
+  const { user } = useAuth();
+
+  const navigate = useNavigate();
+  const handleBookActivity = (activityId: string) => {
+    navigate(`/booking?activityId=${activityId}`);
+  };
+
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
       {/* Navigation */}
@@ -310,8 +313,8 @@ const Index = () => {
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <img
-                src="public/images/Banner.webp"
+              <img // Keep this as public/images/Banner.webp for the logo in the nav
+                src="/images/Banner.webp"
                 alt="Virtud Logo"
                 className="h-10 w-auto object-contain"
               />
@@ -348,12 +351,17 @@ const Index = () => {
                 Contacto
               </a>
               <ThemeToggle />
-              <Button
+              {/* Conditional rendering for Auth/User status */}
+              {user ? (
+                <span className='text-virtud-gray-600 dark:text-gray-300 text-base font-semibold'>¡Hola, {user.email}!</span>
+              ) : (
+                <Button
                 className="bg-virtud-orange-500 hover:bg-virtud-orange-600 text-white text-sm font-bold px-6"
                 onClick={() => setIsAuthModalOpen(true)}
               >
                 Ingresar
               </Button>
+              )}
             </div>
           </div>
         </div>
@@ -367,15 +375,15 @@ const Index = () => {
         {/* Background Logo - Light Mode */}
         <div className="absolute inset-0 flex items-center justify-center opacity-30 dark:opacity-0 transition-opacity duration-300">
           <img
-            src="public/images/LogoBlanco.webp"
+            src="/images/LogoBlanco.webp"
             alt="Virtud Logo"
             className="w-2/3 max-w-2xl h-auto object-contain"
           />
         </div>
         {/* Background Logo - Dark Mode */}
         <div className="absolute inset-0 flex items-center justify-center opacity-0 dark:opacity-30 transition-opacity duration-300">
-          <img
-            src="public/images/BlancoYNegro.webp"
+          <img // Keep this as public/images/BlancoYNegro.webp for the background logo in dark mode
+            src="/images/BlancoYNegro.webp"
             alt="Virtud Logo Dark"
             className="w-2/3 max-w-2xl h-auto object-contain"
           />
@@ -486,6 +494,21 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Activities from Firestore Section */}
+      <section
+        id="actividades-firestore"
+        className="py-16 bg-white dark:bg-gray-900 transition-colors duration-300"
+      >
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 text-virtud-gray-800 dark:text-white">
+            Actividades desde Firestore
+          </h2>
+          <div className="max-w-2xl mx-auto">
+            <ActivitiesList />
+          </div>
+        </div>
+      </section>
+
       {/* Fitness Activities Carousel */}
       <section
         id="actividades"
@@ -497,7 +520,8 @@ const Index = () => {
             subtitle="Actividades diseñadas para mejorar tu condición física y bienestar general"
             activities={fitnessActivities}
             accentColor="virtud-orange-500"
- buttonText="Reserva tu clase"
+            buttonText="Reserva tu clase"
+            onBookActivity={handleBookActivity}
           />
         </div>
       </section>
@@ -510,7 +534,8 @@ const Index = () => {
             subtitle="Disciplinas tradicionales que desarrollan fuerza, técnica y carácter"
             activities={martialArtsActivities}
             accentColor="virtud-orange-600"
- buttonText="Reserva tu clase"
+            buttonText="Reserva tu clase"
+            onBookActivity={handleBookActivity}
           />
         </div>
       </section>
@@ -525,8 +550,10 @@ const Index = () => {
             title="Medicina Tradicional China"
             subtitle="Terapias milenarias para optimizar tu rendimiento y bienestar integral"
             activities={tcmActivities}
-            accentColor="green-600"
- buttonText="Reserva tu turno"/>
+            accentColor="green-600" // Assuming green for TCM
+            buttonText="Reserva tu turno"
+ onBookActivity={handleBookActivity}
+          />
         </div>
       </section>
 
@@ -741,7 +768,7 @@ const Index = () => {
             <Card className="bg-virtud-gray-800 dark:bg-gray-800/50 border-virtud-gray-700 dark:border-gray-600 text-white">
               <CardHeader className="text-center py-8">
                 <img
-                  src="public/images/NegroYBlanco.webp"
+                  src="/images/NegroYBlanco.webp"
                   alt="Virtud Logo"
                   onClick={() => setIsAuthModalOpen(true)}
                   className="h-16 w-auto mx-auto mb-4"
@@ -777,6 +804,13 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Booking Platform Section (Conditionally Rendered) */}
+      {user && ( // Render BookingPlatform only if user is authenticated
+        <section id="booking-platform" className="py-16 bg-white dark:bg-gray-900 transition-colors duration-300">
+          <BookingPlatform />
+        </section>
+      )}
+
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-r from-virtud-orange-500 to-virtud-orange-600 dark:from-virtud-orange-600 dark:to-virtud-orange-700 text-white transition-colors duration-300">
         <div className="container mx-auto px-4 text-center">
@@ -810,7 +844,7 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
-              <img
+              <img // Corrected src for the footer logo
                 src="public/images/NegroYBlanco.webp"
                 alt="Virtud Logo"
                 className="h-16 w-auto mb-4"

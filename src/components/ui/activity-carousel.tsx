@@ -3,14 +3,7 @@ import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Calendar } from "lucide-react";
 import { Button } from "./button";
 import { Card } from "./card";
-
-interface Activity {
-  id: string;
-  title: string;
-  description: string;
-  imageUrl: string;
-  schedule?: string;
-}
+import { Activity } from "@/types/activity";
 
 interface ActivityCarouselProps {
   title: string;
@@ -18,6 +11,7 @@ interface ActivityCarouselProps {
   activities: Activity[];
   accentColor?: string;
   buttonText: string; // Add buttonText prop
+  onBookActivity: ((activityId: string) => void) | undefined; // Add onBookActivity prop
 }
 
 export const ActivityCarousel = ({
@@ -26,6 +20,7 @@ export const ActivityCarousel = ({
   activities,
   accentColor = "virtud-orange-500",
   buttonText, // Destructure buttonText prop
+  onBookActivity, // Destructure onBookActivity prop
 }: ActivityCarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleCards, setVisibleCards] = useState(3);
@@ -155,6 +150,7 @@ export const ActivityCarousel = ({
                     <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
                       <Button
                         size="lg"
+                        onClick={() => onBookActivity && onBookActivity(activity.id)} // Call onBookActivity on click
                         className={`w-full bg-${accentColor} hover:bg-virtud-orange-600 text-white font-semibold shadow-xl`}
                       >
                         <Calendar className="mr-2 h-5 w-5" /> {/* Use buttonText here */}
